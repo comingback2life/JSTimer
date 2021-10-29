@@ -13,10 +13,10 @@ class Timer {
     }
     start = () => { //defining start function with the class property syntax
         if (this.onStart) {
-            this.onStart();
+            this.onStart(this.timeRemaining);
         }
         this.tick();
-        this.interval = setInterval(this.tick, 1000); //1000 ms = 1 s , function is this.tick
+        this.interval = setInterval(this.tick, 20); //20 ms , function is this.tick
     };
     pause = () => {
         clearInterval(this.interval);
@@ -29,9 +29,9 @@ class Timer {
             }
         } else {
             //the value of timeReamining is coming from the getter
-            this.timeRemaining = this.timeRemaining - 1; //provides the value of time to the setter defined
+            this.timeRemaining = this.timeRemaining - .02; //provides the value of time to the setter defined
             if (this.onTick) {
-                this.onTick();
+                this.onTick(this.timeRemaining);
             }
         }
 
@@ -41,7 +41,7 @@ class Timer {
         return parseFloat(this.durationInput.value);
     }
     set timeRemaining(time) {
-        this.durationInput.value = time;
+        this.durationInput.value = time.toFixed(2);
 
     }
 }
